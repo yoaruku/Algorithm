@@ -11,10 +11,6 @@ class Solution {
             list.add(idx);
         }
 
-        if (list.size() > nums.length / 2){
-            return nums.length / 2;
-        } else {
-            return list.size();
-        }
+        return list.size() > nums.length / 2 ? nums.length / 2 : list.size();
     }
 }
