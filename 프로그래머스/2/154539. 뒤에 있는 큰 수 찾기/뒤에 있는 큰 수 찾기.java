@@ -1,33 +1,23 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(int[] numbers) {
-        // 결과값이 길이는 입력값과 동일
-        int[] result = new int[numbers.length];
-
-        // lastOfIndex -1로 고정
-        result[numbers.length-1] = -1;
-
-        for (int i = numbers.length - 2; i >= 0; i--) {
-
-            int max = -1;
-
-            if(numbers[i] < numbers[i+1]) {
-                max = numbers[i+1];
-            } else {
-                for (int j = i + 1; j < numbers.length; j++) {
-                    if(result[j] > numbers[i]) {
-                        max = result[j];
-                        break;
-                    }
-
-                    if(result[j] == -1) {
-                        break;
-                    }
-                }
+        int[] answer = new int[numbers.length];
+        Arrays.fill(answer, -1);
+        
+        Stack<Integer> numberIndexStack = new Stack<>();
+        numberIndexStack.add(0);
+        
+        for(int i = 1; i < numbers.length; i++) {
+            
+            while(!numberIndexStack.isEmpty() && 
+                    numbers[i] > numbers[numberIndexStack.peek()]) {
+                answer[numberIndexStack.pop()] = numbers[i];
             }
-
-            result[i] = max;
+            
+            numberIndexStack.add(i);
         }
-
-        return result;
+        
+        return answer;
     }
 }
