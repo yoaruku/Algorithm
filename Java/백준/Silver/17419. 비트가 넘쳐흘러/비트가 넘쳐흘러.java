@@ -8,19 +8,13 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int k = Integer.parseInt(br.readLine());
+        int n = Integer.parseInt(br.readLine());
         String input = br.readLine();
 
-        k = 0;
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(input.length() - i - 1) == '1')
-                k += 1 << i;
-        }
-
         int count = 0;
-        while (k != 0) {
-            k -= k & ((~k) + 1);
-            count++;
+        for (int i = 0; i < n; i++){
+            if (input.charAt(i) == '1')
+                count++;
         }
 
         System.out.println(count);
